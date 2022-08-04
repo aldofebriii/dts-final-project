@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Layout/Header';
+import Meals from './components/Meals/Meals';
+import Cart from './components/Cart/Cart';
+import CartProvider from './store/CartProvider';
+import Footer from './components/Layout/Footer';
 
-function App() {
+const  App = () => {
+  const [cartVisible, setCartVisible] = useState(false);
+
+  const cartVisibleHandler = () => {
+    setCartVisible((previousVisible) => {
+      return !previousVisible
+    });
+  };
+
+  const mealsComponent = <CartProvider>
+    <Header onOpenCloseModal={cartVisibleHandler} />
+    <main>
+      {cartVisible && <Cart onOpenCloseModal={cartVisibleHandler}/>}
+      <Meals />
+    </main>
+    <Footer />
+  </CartProvider>
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/meals" replace/>} />
+      <Route path="/meals" element={mealsComponent} />
+    </Routes>
   );
 }
 
