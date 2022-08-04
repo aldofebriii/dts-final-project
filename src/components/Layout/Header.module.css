@@ -33,3 +33,19 @@
   object-fit: cover;
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
+
+@media only screen and (max-width: 600px) {
+  .navLink li {
+    display: inline;
+    margin: 0;
+  }
+  .header {
+    padding: 0 2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cartSpan {
+    display: none;
+  }
+}
