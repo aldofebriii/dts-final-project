@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import UserContext from './user-context';
 import { googleLogout } from '@react-oauth/google';
 
@@ -37,9 +37,9 @@ const userReducer = (state, action) => {
 
 const UserProvider = (props) => {
     const [auth, dispatchUser] = useReducer(userReducer, defaultUserState);
-    const userLoginHandler = (via, userToken) => {
+    const userLoginHandler = useCallback((via, userToken) => {
         dispatchUser({type: "LOGIN", via: via, token: userToken});
-    };
+    }, []);
 
     const userLogoutHandler = (via) =>{
         dispatchUser({type: "LOGOUT", via: via})

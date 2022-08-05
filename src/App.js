@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import useFetch from './hooks/use-fetch';
 import UserContext from './data/user-context';
 import Orders from './components/Orders/Order';
+import Signup from './components/Auth/Register';
 
 const  App = () => {
   const [cartVisible, setCartVisible] = useState(false);
@@ -59,6 +60,7 @@ const  App = () => {
   return (
     <Routes>
       <Route path="/" element={ctx.isLoggedIn ? <Navigate to="/meals" replace/> : <Navigate to="/login" replace/>} />
+      {!ctx.isLoggedIn && <Route path="/sign-up" element={<Signup />} />}
       <Route path="/login" element={!ctx.isLoggedIn ? loginComponent : <Navigate to="/meals" />} /> 
       <Route path="/meals" element={ctx.isLoggedIn ? mealsComponent : <Navigate to="/login" replace/>} />
       <Route path="/orders" element={orderComponent} />
