@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 const useFetch = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [err, setErr] = useState(null);
-    const sendRequest = useCallback(async ({uri, method="GET", headers, body=null}, dataFn=()=>{}) => {
+    const sendRequest = useCallback(async ({uri, method="GET", headers={'Content-type': 'application/json'}, body=null}, dataFn=()=>{}) => {
         setErr(null);
         setIsLoading(true);
         try {
