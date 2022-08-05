@@ -15,8 +15,8 @@ const  App = () => {
   const [cartVisible, setCartVisible] = useState(false);
   const sendRequest = useFetch()[2];
   const navigation = useNavigate();
-  const ctx = useContext(UserContext);
-
+  const ctx = useContext(UserContext)
+  const { userLogin } = useContext(UserContext);
   const cartVisibleHandler = () => {
     setCartVisible((previousVisible) => {
       return !previousVisible
@@ -50,10 +50,10 @@ const  App = () => {
     const userToken = localStorage.getItem('userToken');
     if(userToken){
       sendRequest({uri: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDF-CQDTijZSeAZBMLYz-KCA1eHLkqLPVs', method: 'POST', body: JSON.stringify({idToken: userToken})}, (rawData) => {
-        ctx.userLogin('email', userToken);
+        userLogin('email', userToken);
       })
     };
-  }, [sendRequest, navigation])
+  }, [sendRequest, navigation, userLogin])
 
 
   return (

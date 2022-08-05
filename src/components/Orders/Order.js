@@ -14,7 +14,7 @@ const Orders = ({id, user, items}) => {
             };
             setLoadedOrders(_temp);
         });
-    },[loadedOrders]);
+    },[loadedOrders, sendRequest]);
 
     let ctx;
     if(loadedOrders.length === 0){
